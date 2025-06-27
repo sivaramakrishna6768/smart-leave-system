@@ -1,0 +1,16 @@
+.hero-background {
+  background: linear-gradient(135deg, #1d2671, #c33764);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.bg-login-gradient {
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #b31217);
+  min-height: 100vh;
+}
