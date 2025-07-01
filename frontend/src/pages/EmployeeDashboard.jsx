@@ -25,6 +25,8 @@ const EmployeeDashboard = () => {
   const token = localStorage.getItem('token');
   const user = token ? jwtDecode(token) : null;
 
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     window.location.href = '/login';
@@ -35,7 +37,7 @@ const EmployeeDashboard = () => {
     const fetchLeaveHistory = async () => {
       try {
         const userId = user?.id;
-        const response = await axios.get(`http://localhost:5000/api/leave/${userId}`, {
+        const response = await axios.get(`${apiBaseUrl}/leave/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setLeaveData(response.data);
@@ -60,7 +62,7 @@ const EmployeeDashboard = () => {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/leave',
+        `${apiBaseUrl}/leave`,
         { startDate, endDate, reason },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -72,7 +74,7 @@ const EmployeeDashboard = () => {
 
       // Refresh leave history
       const userId = user?.id;
-      const response = await axios.get(`http://localhost:5000/api/leave/${userId}`, {
+      const response = await axios.get(`${apiBaseUrl}/leave/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

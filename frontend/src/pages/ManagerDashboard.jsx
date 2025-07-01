@@ -21,6 +21,8 @@ const ManagerDashboard = () => {
   const token = localStorage.getItem('token');
   const user = token ? jwtDecode(token) : null;
 
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     window.location.href = '/login';
@@ -28,7 +30,7 @@ const ManagerDashboard = () => {
 
   const fetchLeaves = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/leave/all', {
+      const res = await axios.get(`${apiBaseUrl}/leave/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLeaves(res.data);
@@ -43,7 +45,7 @@ const ManagerDashboard = () => {
     setSuccess('');
     try {
       await axios.put(
-        `http://localhost:5000/api/leave/${id}`,
+        `${apiBaseUrl}/leave/${id}`,
         { status },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -155,3 +157,4 @@ const ManagerDashboard = () => {
 };
 
 export default ManagerDashboard;
+
