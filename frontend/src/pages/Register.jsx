@@ -27,7 +27,8 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('/api/auth/register', formData);
+      const baseURL = import.meta.env.VITE_API_BASE_URL;
+      const res = await axios.post(`${baseURL}/auth/register`, formData);
 
       localStorage.setItem('userInfo', JSON.stringify(res.data));
 
